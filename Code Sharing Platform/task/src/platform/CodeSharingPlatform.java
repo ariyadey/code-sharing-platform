@@ -11,8 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 public class CodeSharingPlatform {
 
-    final String code = "public static void main(String[] args) {\n" +
-                        "    SpringApplication.run(CodeSharingPlatform.class, args);";
+    private static final class Code {
+        private final String code;
+
+        private Code() {
+            code = "public static void main(String[] args) {\n" +
+                   "    SpringApplication.run(CodeSharingPlatform.class, args);";
+        }
+
+        public String getCode() {
+            return code;
+        }
+    }
+
+    private static final Code CODE = new Code();
 
     public static void main(String[] args) {
         SpringApplication.run(CodeSharingPlatform.class, args);
@@ -29,15 +41,15 @@ public class CodeSharingPlatform {
                "    </head>\n" +
                "    <body>\n" +
                "        <pre>\n" +
-               code +
+               CODE.getCode() +
                "</pre>\n" +
                "    </body>\n" +
                "</html>";
     }
 
     @GetMapping("/api/code")
-    private String getCodeAPI(HttpServletResponse response) {
+    private Code getCodeAPI(HttpServletResponse response) {
         response.addHeader("Content-Type", "application/json");
-        return code;
+        return CODE;
     }
 }
