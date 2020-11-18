@@ -4,12 +4,18 @@ import java.time.LocalDateTime;
 
 public class Code {
     private String code;
-    private LocalDateTime uploadDateTime;
+    private LocalDateTime updateDateTime;
 
     public String getCode() {
         return code;
     }
-    public LocalDateTime getUploadDateTime() {
-        return uploadDateTime;
+
+    public LocalDateTime getUpdateDateTime() {
+        return updateDateTime;
+    }
+
+    public void update(String code) {
+        this.code = code;
+        updateDateTime = LocalDateTime.now();
     }
 }
