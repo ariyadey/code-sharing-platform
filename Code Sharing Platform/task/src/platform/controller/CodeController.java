@@ -29,11 +29,12 @@ public class CodeController {
         return "code";
     }
 
-    @ResponseBody
     @PostMapping(value = "/api/code/new", consumes = "application/json")
     private String postCode(@RequestBody Code code, HttpServletResponse response) {
         response.addHeader("content-type", "application/json");
         this.code = code;
         return "";
     }
+
+
 }
