@@ -22,7 +22,7 @@ public class CodeController {
     }
 
     @GetMapping(value = "/code")
-    private String getCodeHTML(HttpServletResponse response, Model model) {
+    private String getCodeView(HttpServletResponse response, Model model) {
         response.addHeader("Content-Type", "text/html");
         model.addAttribute("date", code.getCode());
         model.addAttribute("code", code.getUploadDateTime());
