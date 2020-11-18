@@ -1,27 +1,24 @@
 package platform.controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import platform.model.Code;
 
 import javax.servlet.http.HttpServletResponse;
 
+@RestController
 public class CodeController {
-    private static final class Code {
-        private final String code;
+    private final Code code = new Code();
 
-        private Code() {
-            code = "public static void main(String[] args) {\n" +
-                   "    SpringApplication.run(CodeSharingPlatform.class, args);";
-        }
-
-        public String getCode() {
-            return code;
-        }
+    @GetMapping("/api/code")
+    private Code getCodeAPI(HttpServletResponse response) {
+        response.addHeader("Content-Type", "application/json");
+        return code;
     }
 
-    private static final Code CODE = new Code();
-
     @GetMapping("/code")
-    private String getCodeHTML(HttpServletResponse response) {
+    private String getCodeHTML( HttpServletResponse response) {
         response.addHeader("Content-Type", "text/html");
         return "<!DOCTYPE html>" +
                "<html>\n" +
@@ -31,15 +28,9 @@ public class CodeController {
                "    </head>\n" +
                "    <body>\n" +
                "        <pre>\n" +
-               CODE.getCode() +
+               code.getCode() +
                "</pre>\n" +
                "    </body>\n" +
                "</html>";
-    }
-
-    @GetMapping("/api/code")
-    private Code getCodeAPI(HttpServletResponse response) {
-        response.addHeader("Content-Type", "application/json");
-        return CODE;
     }
 }
