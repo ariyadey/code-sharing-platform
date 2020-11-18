@@ -1,15 +1,18 @@
 package platform.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import platform.model.Code;
 
 import javax.servlet.http.HttpServletResponse;
 
-@RestController
+@Controller
 public class CodeController {
     private final Code code = new Code();
 
+    @ResponseBody
     @GetMapping("/api/code")
     private Code getCodeAPI(HttpServletResponse response) {
         response.addHeader("Content-Type", "application/json");
@@ -17,19 +20,10 @@ public class CodeController {
     }
 
     @GetMapping("/code")
-    private String getCodeHTML( HttpServletResponse response) {
+    private String getCodeHTML(HttpServletResponse response, Model model) {
         response.addHeader("Content-Type", "text/html");
-        return "<!DOCTYPE html>" +
-               "<html>\n" +
-               "    <head>\n" +
-               "        <meta charset=utf-8>" +
-               "        <title>Code</title>\n" +
-               "    </head>\n" +
-               "    <body>\n" +
-               "        <pre>\n" +
-               code.getCode() +
-               "</pre>\n" +
-               "    </body>\n" +
-               "</html>";
+        model.addAttribute("code", code.getCode());
+        return "code";
+
     }
 }
