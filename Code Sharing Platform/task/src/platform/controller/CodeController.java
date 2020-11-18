@@ -15,17 +15,17 @@ public class CodeController {
     private Code code = new Code();
 
     @ResponseBody
-    @GetMapping(value = "/api/code", consumes = "application/json")
+    @GetMapping(value = "/api/code")
     private Code getCode(HttpServletResponse response) {
         response.addHeader("Content-Type", "application/json");
         return code;
     }
 
-    @GetMapping(value = "/code", produces = "text/html")
+    @GetMapping(value = "/code")
     private String getCodeHTML(HttpServletResponse response, Model model) {
         response.addHeader("Content-Type", "text/html");
-        model.addAttribute("date", "for date attribute");
-        model.addAttribute("code", "for code attribute");
+        model.addAttribute("date", code.getCode());
+        model.addAttribute("code", code.getUploadDateTime());
         return "code";
     }
 
