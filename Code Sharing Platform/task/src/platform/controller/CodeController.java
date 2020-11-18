@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class CodeController {
-    private Code code = new Code();
+    private final Code code = new Code();
 
     @ResponseBody
     @GetMapping(value = "/api/code")
@@ -25,14 +25,14 @@ public class CodeController {
     private String getCodeView(HttpServletResponse response, Model model) {
         response.addHeader("Content-Type", "text/html");
         model.addAttribute("date", code.getCode());
-        model.addAttribute("code", code.getUploadDateTime());
+        model.addAttribute("code", code.getUpdateDateTime());
         return "code";
     }
 
-    @PostMapping(value = "/api/code/new", consumes = "application/json")
+    @PostMapping(value = "/api/code/new", consumes = "application/json; charset=utf-8")
     private String postCode(@RequestBody Code code, HttpServletResponse response) {
         response.addHeader("content-type", "application/json");
-        this.code = code;
+        code.update(code.getCode());
         return "";
     }
 
