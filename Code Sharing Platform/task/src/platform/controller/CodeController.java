@@ -21,7 +21,7 @@ public class CodeController {
         return code;
     }
 
-    @GetMapping("/code")
+    @GetMapping(value = "/code", produces = "text/html")
     private String getCodeHTML(HttpServletResponse response, Model model) {
         response.addHeader("Content-Type", "text/html");
         model.addAttribute("date", "for date attribute");
