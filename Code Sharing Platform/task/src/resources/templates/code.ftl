@@ -6,6 +6,8 @@
     <title>Code</title>
 </head>
 <body>
-<pre>${code}</pre>
+<#if code??>
+    <pre>${code}</pre>
+</#if>
 </body>
 </html>
