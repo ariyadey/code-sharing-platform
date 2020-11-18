@@ -1,4 +1,3 @@
-<#-- @ftlvariable name="code" type="java.lang.String" -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +5,12 @@
     <title>Code</title>
 </head>
 <body>
+<#if date??>
+    <span id="load_date">${date}</span>
+</#if>
+<br>
 <#if code??>
-    <pre>${code}</pre>
+    <pre id="code_snippet">${code}</pre>
 </#if>
 </body>
 </html>
