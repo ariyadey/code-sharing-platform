@@ -36,5 +36,9 @@ public class CodeController {
         return "";
     }
 
-
+    @GetMapping("/code/new")
+    private String getNewCodeView(HttpServletResponse response) {
+        response.addHeader("Content-Type", "text/html");
+        return "new-code.html";
+    }
 }
