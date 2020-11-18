@@ -15,8 +15,7 @@
 <script>
     function send() {
         let object = {
-            //todo should it be "code"?
-            "code": document.getElementById("code_snippet").value
+            "code": document.getElementById("code_snippet").value,
         };
 
         let json = JSON.stringify(object);
