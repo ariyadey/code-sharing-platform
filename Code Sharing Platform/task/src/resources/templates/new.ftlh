@@ -5,7 +5,7 @@
     <title>Create</title>
 </head>
 <body>
-<form action="" method="post">
+<form action="/api/code/new" method="post">
     <label for="code_snippet">Type your code below:</label>
     <br>
     <textarea id="code_snippet"></textarea>

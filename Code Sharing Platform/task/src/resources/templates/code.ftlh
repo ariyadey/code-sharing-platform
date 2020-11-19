@@ -6,9 +6,8 @@
 </head>
 <body>
 <#if date??>
-    <span id="load_date">${date}</span>
+    <p><span id="load_date">${date}</span></p>
 </#if>
-<br>
 <#if code??>
     <pre id="code_snippet">${code}</pre>
 </#if>

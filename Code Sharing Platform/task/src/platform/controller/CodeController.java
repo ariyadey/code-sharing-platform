@@ -6,39 +6,41 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import platform.model.Code;
+import platform.model.CodeRepository;
 
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class CodeController {
-    private final Code code = new Code();
+    private static final String INITIAL_CODE_SNIPPET = "println(\"Hello World\")";
+    private final CodeRepository codeRepository = new CodeRepository(INITIAL_CODE_SNIPPET);
 
     @ResponseBody
     @GetMapping(value = "/api/code")
-    private Code getCode(HttpServletResponse response) {
+    private CodeRepository getCode(HttpServletResponse response) {
         response.addHeader("Content-Type", "application/json");
-        return code;
+        return codeRepository;
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/api/code/new", consumes = "application/json; charset=utf-8")
+    private String postCode(@RequestBody CodeRepository codeRepository, HttpServletResponse response) {
+        response.addHeader("Content-Type", "application/json");
+        this.codeRepository.update(codeRepository.getCode());
+        return "";
     }
 
     @GetMapping(value = "/code")
     private String getCodeView(HttpServletResponse response, Model model) {
         response.addHeader("Content-Type", "text/html");
-        model.addAttribute("date", code.getCode());
-        model.addAttribute("code", code.getUpdateDateTime());
+        model.addAttribute("date", codeRepository.getDate());
+        model.addAttribute("code", codeRepository.getCode());
         return "code";
-    }
-
-    @PostMapping(value = "/api/code/new", consumes = "application/json; charset=utf-8")
-    private String postCode(@RequestBody Code code, HttpServletResponse response) {
-        response.addHeader("content-type", "application/json");
-        code.update(code.getCode());
-        return "";
     }
 
     @GetMapping("/code/new")
     private String getNewCodeView(HttpServletResponse response) {
         response.addHeader("Content-Type", "text/html");
-        return "new-code";
+        return "new";
     }
 }
