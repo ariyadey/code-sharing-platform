@@ -19,6 +19,13 @@ public class ViewController {
         return "code";
     }
 
+    @GetMapping(value = "/code/latest")
+    private String getLatestCodeView(Model model) {
+        //todo try addAllAttribute() method
+        model.addAttribute("codeList", CODES.subList(CODES.size() - 10, CODES.size())); //todo it's unsafe!!!
+        return "codes";
+    }
+
     @GetMapping("/code/new")
     private String getNewCodeView() {
         return "new";

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+//@ServletComponentScan
 public class CodeSharingPlatform {
     public static final List<Code> CODES = new ArrayList<>();
 
