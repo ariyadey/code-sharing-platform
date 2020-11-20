@@ -17,5 +17,4 @@ public class CodeSharingPlatform {
 }
 
 //todo: add IoC
-//todo: Use Filter to omit duplicated code for HTTP headers (Link in first or second stage)
 //todo: change the hierarchy of folders according to your specifications
