@@ -3,6 +3,8 @@ package platform.controller;
 import org.springframework.web.bind.annotation.*;
 import platform.model.Code;
 
+import java.util.List;
+
 import static platform.CodeSharingPlatform.CODES;
 
 @RestController
@@ -13,9 +15,9 @@ public class APIController {
         return CODES.get(codeIndex);
     }
 
-    @GetMapping(value = "/api/code/latest") //todo complete method
-    private Code getLatestCode() { //todo does it accept int?
-        return CODES.get(CODES.size() - 1);
+    @GetMapping(value = "/api/code/latest")
+    private List<Code> getLatestCode() {
+        return CODES.subList(CODES.size() - 10, CODES.size());
     }
 
     @PostMapping(value = "/api/code/new", consumes = "application/json")
