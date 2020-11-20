@@ -23,11 +23,11 @@ public class CodeController {
     }
 
     @ResponseBody
-    @PostMapping(value = "/api/code/new", consumes = "application/json; charset=utf-8")
+    @PostMapping(value = "/api/code/new", consumes = "application/json")
     private String postCode(@RequestBody CodeRepository codeRepository, HttpServletResponse response) {
         response.addHeader("Content-Type", "application/json");
         this.codeRepository.update(codeRepository.getCode());
-        return "";
+        return "{}";
     }
 
     @GetMapping(value = "/code")
