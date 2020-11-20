@@ -4,25 +4,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import platform.model.Code;
+
+import java.util.ArrayList;
+import java.util.Comparator;
 
 import static platform.CodeSharingPlatform.CODES;
 
 @Controller
 public class ViewController {
-    //    private static final String INITIAL_CODE_SNIPPET = "println(\"Hello World\")"; //todo maybe we don't need it anymore
-//    private final Code code = new Code(INITIAL_CODE_SNIPPET);
 
-    @GetMapping(value = "/code/{codeNumber}")   //todo does it accept int?
+    @GetMapping(value = "/code/{codeNumber}")
     private String getCodeView(Model model, @PathVariable int codeNumber) {
-        model.addAttribute("date", CODES.get(codeNumber).getDate());
-        model.addAttribute("code", CODES.get(codeNumber).getCode());
+        //todo can you make two statements one? (With the help of Freemarker)
+        model.addAttribute("date", CODES.get(codeNumber - 1).getDate());
+        model.addAttribute("code", CODES.get(codeNumber - 1).getCode());
         return "code";
     }
 
     @GetMapping(value = "/code/latest")
     private String getLatestCodeView(Model model) {
+        final var latestCodes = new ArrayList<>(CODES.subList(CODES.size() > 10 ? CODES.size() - 10 : 0, CODES.size()));
+        latestCodes.sort(Comparator.comparing(Code::getDate).reversed()); //todo extract method
         //todo try addAllAttribute() method
-        model.addAttribute("codeList", CODES.subList(CODES.size() - 10, CODES.size())); //todo it's unsafe!!!
+        model.addAttribute("codeList", latestCodes);
         return "codes";
     }
 
