@@ -3,7 +3,7 @@ package platform.model;
 import java.time.LocalDateTime;
 
 @SuppressWarnings("unused")
-public class CodeRepository {
+public class Code {
     private String code;
     private LocalDateTime date;
 
@@ -23,10 +23,10 @@ public class CodeRepository {
         this.date = date;
     }
 
-    public CodeRepository() {
+    public Code() {
     }
 
-    public CodeRepository(String code) {
+    public Code(String code) {
         this.code = code;
         date = LocalDateTime.now();
     }
