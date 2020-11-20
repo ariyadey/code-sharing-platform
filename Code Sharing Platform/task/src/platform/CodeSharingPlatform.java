@@ -1,5 +1,3 @@
-//todo: change the hierarchy of folders according to your specifications
-
 package platform;
 
 import org.springframework.boot.SpringApplication;
@@ -11,3 +9,8 @@ public class CodeSharingPlatform {
         SpringApplication.run(CodeSharingPlatform.class, args);
     }
 }
+
+//todo: add IoC
+//todo: Use Filter to omit duplicated code for HTTP headers (Link in first or second stage)
+//todo: split controllers from REST controllers
+//todo: change the hierarchy of folders according to your specifications
