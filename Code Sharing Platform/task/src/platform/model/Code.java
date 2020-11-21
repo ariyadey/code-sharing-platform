@@ -1,11 +1,13 @@
 package platform.model;
 
+import platform.utils.DateTime;
+
 import java.time.LocalDateTime;
 
 @SuppressWarnings("unused")
 public class Code {
     private String code;
-    private LocalDateTime date;
+    private String date;
 
     public String getCode() {
         return code;
@@ -15,16 +17,15 @@ public class Code {
         this.code = code;
     }
 
-    //todo: manipulate it to return formatted dateTime
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
     void update() {
-        date = LocalDateTime.now();
+        date = DateTime.format(LocalDateTime.now());
     }
 }
