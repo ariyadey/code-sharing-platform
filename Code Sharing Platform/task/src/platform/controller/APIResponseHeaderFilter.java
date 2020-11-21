@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 //@WebFilter("/api/*")
-@Component("/api/*")    //todo does it work?
+@Component("/api/*")
 public class APIResponseHeaderFilter implements Filter {
 
     @Override

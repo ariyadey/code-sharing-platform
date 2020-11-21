@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 //@WebFilter("")
-@Component()    //todo does it work?
+@Component()
 public class ViewResponseHeaderFilter implements Filter {
 
     @Override
