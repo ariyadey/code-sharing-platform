@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import platform.model.Code;
 import platform.model.CodeRepo;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -18,23 +16,21 @@ public class APIController {
         this.repo = repo;
     }
 
-    @GetMapping(value = "/api/code/{codeIndex}")
-    private Code getCode(@PathVariable int codeIndex) { //todo does it accept int?
-        return repo.getCodes().get(codeIndex - 1);
+    @GetMapping(value = "/api/code/{n}")
+    private Code getCode(@PathVariable int n) { //todo does it accept int?
+        return repo.getAt(n - 1);
     }
 
+    // todo: it returns the 10 most recently uploaded codes
     @GetMapping(value = "/api/code/latest")
     private List<Code> getLatestCode() {
-        final var latestCodes = new ArrayList<>(repo.getCodes().subList(repo.getCodes().size() > 10 ? repo.getCodes().size() - 10 : 0, repo.getCodes().size()));
-        latestCodes.sort(Comparator.comparing(Code::getDate).reversed());   //todo extract method
-        return latestCodes;
+        return repo.getLatest(10);
     }
 
+    //todo return in a more modern way
     @PostMapping(value = "/api/code/new", consumes = "application/json")
     private String postCode(@RequestBody Code code) {
-        code.update();
-        repo.getCodes().add(code);
-        //todo return in a more modern way
-        return String.format("{\"%s\": \"%d\"}", "id", repo.getCodes().size());
+        repo.add(code);
+        return String.format("{\"%s\": \"%d\"}", "id", repo.size());
     }
 }

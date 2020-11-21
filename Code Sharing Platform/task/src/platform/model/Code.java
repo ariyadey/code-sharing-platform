@@ -17,7 +17,7 @@ public class Code {
 
     public LocalDateTime getDate() {
         return date;
-    }
+    }   //todo: manipulate it to return formatted dateTime
 
     public void setDate(LocalDateTime date) {
         this.date = date;
