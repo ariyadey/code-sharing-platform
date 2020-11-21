@@ -2,7 +2,7 @@ package platform.model;
 
 import java.time.LocalDateTime;
 
-//@SuppressWarnings("unused")
+@SuppressWarnings("unused")
 public class Code {
     private String code;
     private LocalDateTime date;

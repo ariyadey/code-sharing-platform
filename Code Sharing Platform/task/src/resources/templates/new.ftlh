@@ -5,7 +5,8 @@
     <title>Create</title>
 </head>
 <body>
-<#--todo get the ID of code-->
+<#--todo get the ID of code (optional)-->
+<#--todo remove form or something else?1-->
 <form action="/api/code/new" method="post">
     <label for="code_snippet">Type your code below:</label>
     <br>

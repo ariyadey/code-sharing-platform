@@ -121,6 +121,18 @@ public class CodeSharingPlatformTest extends SpringTest {
             () -> checkWebLatest(13, 12, 11, 10, 9, 8, 7, 6, 5, 4),
     };
 
+    static String th(int val) {
+        if (val == 1) {
+            return "" + val + "st";
+        } else if (val == 2) {
+            return "" + val + "nd";
+        } else if (val == 3) {
+            return "" + val + "rd";
+        } else {
+            return "" + val + "th";
+        }
+    }
+
     static void checkStatusCode(HttpResponse resp, int status) {
         if (resp.getStatusCode() != status) {
             throw new WrongAnswer(
@@ -140,21 +152,19 @@ public class CodeSharingPlatformTest extends SpringTest {
         }
     }
 
-    static String th(int val) {
-        if (val == 1) {
-            return "" + val + "st";
-        } else if (val == 2) {
-            return "" + val + "nd";
-        } else if (val == 3) {
-            return "" + val + "rd";
-        } else {
-            return "" + val + "th";
-        }
-    }
-
     static Element getSingleTag(Document doc, String url, String tag) {
         Elements elems = getElemsByTag(doc, url, tag, 1);
         return elems.get(0);
+    }
+
+    static Elements getElemsByTag(Document doc, String url, String tag, int length) {
+        Elements elems = doc.getElementsByTag(tag);
+        if (elems.size() != length) {
+            throw new WrongAnswer("GET " + url +
+                                  " should contain " + length + " <" + tag + "> " +
+                                  "element" + (length == 1 ? "" : "s") + ", found: " + elems.size());
+        }
+        return elems;
     }
 
     static Element getById(Document doc, String url, String id, String tag) {
@@ -172,16 +182,6 @@ public class CodeSharingPlatformTest extends SpringTest {
         }
 
         return elem;
-    }
-
-    static Elements getElemsByTag(Document doc, String url, String tag, int length) {
-        Elements elems = doc.getElementsByTag(tag);
-        if (elems.size() != length) {
-            throw new WrongAnswer("GET " + url +
-                                  " should contain " + length + " <" + tag + "> " +
-                                  "element" + (length == 1 ? "" : "s") + ", found: " + elems.size());
-        }
-        return elems;
     }
 
     private CheckResult checkApiCode(int id) {

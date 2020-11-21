@@ -19,8 +19,5 @@ public class CodeSharingPlatform {
 
 /*
 todo: add IoC
-todo: change the hierarchy of folders according to your specifications
-todo:To get an individual snippet, you need to use GET /code/N and GET /api/code/N endpoints, where N is the code snippet number starting from 1.
-todo: inverse the order of returning code objects
-todo: Add DateTime Formatter
+todo: change the hierarchy of folders according to your specifications and mvc
 */
