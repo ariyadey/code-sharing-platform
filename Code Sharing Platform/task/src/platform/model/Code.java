@@ -15,15 +15,16 @@ public class Code {
         this.code = code;
     }
 
+    //todo: manipulate it to return formatted dateTime
     public LocalDateTime getDate() {
         return date;
-    }   //todo: manipulate it to return formatted dateTime
+    }
 
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public void update() {
+    void update() {
         date = LocalDateTime.now();
     }
 }

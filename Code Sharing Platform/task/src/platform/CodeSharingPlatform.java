@@ -15,4 +15,5 @@ public class CodeSharingPlatform {
 
 /*
 todo: change the hierarchy of folders according to your specifications and mvc
+todo: format the output dateTime
 */

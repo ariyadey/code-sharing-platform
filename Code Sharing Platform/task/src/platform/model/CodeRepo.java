@@ -10,7 +10,6 @@ import java.util.List;
 public class CodeRepo {
     private final List<Code> codes = new ArrayList<>();
 
-    //todo complete and use it instead of getCodes()
     public Code getAt(int index) {
         return codes.get(index);
     }
@@ -24,9 +23,10 @@ public class CodeRepo {
         return codes.size();
     }
 
-    public List<Code> getLatest(int n) { //todo improve this method
-        final var repoSize = codes.size();
-        final var latestCodes = new ArrayList<>(codes.subList(repoSize > 10 ? repoSize - 10 : 0, repoSize));
+    //todo improve this method
+    public List<Code> getLatest(int n) {
+        final var size = codes.size();
+        final var latestCodes = new ArrayList<>(codes.subList(size > n ? size - n : 0, size));
         latestCodes.sort(Comparator.comparing(Code::getDate).reversed());
         return latestCodes;
     }

@@ -25,7 +25,6 @@ public class ViewController {
     }
 
     // todo: it returns the 10 most recently uploaded codes
-    //todo try addAllAttribute() method
     @GetMapping(value = "/code/latest")
     private String getLatestCodeView(Model model) {
         model.addAttribute("codeList", repo.getLatest(10));

@@ -6,7 +6,7 @@
 </head>
 <body>
 <#--todo get the ID of code (optional)-->
-<#--todo remove form or something else?1-->
+<#--todo remove form or something else?-->
 <form action="/api/code/new" method="post">
     <label for="code_snippet">Type your code below:</label>
     <br>
