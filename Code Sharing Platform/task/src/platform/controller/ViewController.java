@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import platform.model.CodeRepo;
 
 @Controller
-public class ViewController {
+public final class ViewController {
     private final CodeRepo repo;
 
     @Autowired

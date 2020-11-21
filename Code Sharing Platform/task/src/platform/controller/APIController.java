@@ -8,7 +8,7 @@ import platform.model.CodeRepo;
 import java.util.List;
 
 @RestController
-public class APIController {
+public final class APIController {
     private final CodeRepo repo;
 
     @Autowired

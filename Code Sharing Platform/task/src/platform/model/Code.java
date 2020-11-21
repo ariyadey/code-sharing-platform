@@ -5,7 +5,7 @@ import platform.utils.DateTime;
 import java.time.LocalDateTime;
 
 @SuppressWarnings("unused")
-public class Code {
+public final class Code {
     private String code;
     private String date;
 

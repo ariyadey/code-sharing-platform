@@ -8,12 +8,12 @@ import java.io.IOException;
 
 //@WebFilter("/api/*")
 @Component("/api/*")
-public class APIResponseHeaderFilter implements Filter {
+public final class APIResponseHeaderFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest request,
-                         ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
+    public final void doFilter(ServletRequest request,
+                               ServletResponse response,
+                               FilterChain chain) throws IOException, ServletException {
         final var httpServletResponse = (HttpServletResponse) response;
         httpServletResponse.setHeader("Content-Type", "application/json");
         chain.doFilter(request, response);

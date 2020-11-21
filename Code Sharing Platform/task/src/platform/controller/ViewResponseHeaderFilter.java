@@ -8,12 +8,12 @@ import java.io.IOException;
 
 //@WebFilter("")
 @Component()
-public class ViewResponseHeaderFilter implements Filter {
+public final class ViewResponseHeaderFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest request,
-                         ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
+    public final void doFilter(ServletRequest request,
+                               ServletResponse response,
+                               FilterChain chain) throws IOException, ServletException {
         final var httpServletResponse = (HttpServletResponse) response;
         httpServletResponse.setHeader("Content-Type", "text/html");
         chain.doFilter(request, response);
