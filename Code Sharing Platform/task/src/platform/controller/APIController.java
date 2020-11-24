@@ -3,16 +3,16 @@ package platform.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import platform.model.Code;
-import platform.model.CodeRepo;
+import platform.model.CodeRepository;
 
 import java.util.List;
 
 @RestController
 public final class APIController {
-    private final CodeRepo repo;
+    private final CodeRepository repo;
 
     @Autowired
-    public APIController(CodeRepo repo) {
+    public APIController(CodeRepository repo) {
         this.repo = repo;
     }
 
