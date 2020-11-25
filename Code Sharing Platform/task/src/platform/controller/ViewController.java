@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import platform.model.CodeRepository;
+import platform.utils.DateTime;
+
+import java.util.Date;
 
 @Controller
 public final class ViewController {
@@ -24,7 +27,7 @@ public final class ViewController {
         final var code = repo.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no code with the given ID")
         );
-        model.addAttribute("date", code.getDate());
+        model.addAttribute("date", DateTime.Formatted(code.getDate()));
         model.addAttribute("code", code.getCode());
         return "code";
     }
