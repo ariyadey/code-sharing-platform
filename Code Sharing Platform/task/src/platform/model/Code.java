@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @SuppressWarnings("unused")
 @Entity
@@ -15,7 +17,7 @@ public final class Code {
     private long id;
     @Column(name = "SNIPPET")
     private String code;
-    private String date;    //todo Save date in DB as Date!!!
+    private LocalDateTime date;    //todo Save date in DB as Date!!!
 
     public Code() {
     }
@@ -36,16 +38,16 @@ public final class Code {
         this.code = code;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
     public void resetDate() {
-        date = DateTime.nowFormatted();
+        date = LocalDateTime.now(ZoneId.systemDefault());
     }
 
     @Override
