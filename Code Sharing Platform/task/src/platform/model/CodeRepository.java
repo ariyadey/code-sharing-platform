@@ -10,6 +10,6 @@ public interface CodeRepository extends CrudRepository<Code, Long> {
     List<Code> findAllByOrderByDateDesc();
 
     default List<Code> findLatestByOrderByDateDesc(int length) {
-        return findAllByOrderByDateDesc().subList(0, (int) Math.min(length, count()));
+        return findAllByOrderByDateDesc().subList(0, (int) Math.min(length, count()) - 1);
     }
 }
