@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import platform.model.Code;
 import platform.model.CodeRepository;
+import platform.utils.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public final class APIController {
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no code with the given ID"));
         return Map.of(
                 "code", code.getCode(),
-                "date", code.getDate()
+                "date", DateTime.Formatted(code.getDate())
         );
     }
 
@@ -47,7 +48,7 @@ public final class APIController {
         for (var code : codes) {
             codeMapList.add(Map.of(
                     "code", code.getCode(),
-                    "date", code.getDate()
+                    "date", DateTime.Formatted(code.getDate())
             ));
         }
         return codeMapList;
