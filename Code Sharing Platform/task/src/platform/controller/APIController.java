@@ -8,6 +8,8 @@ import platform.model.Code;
 import platform.model.CodeRepository;
 import platform.utils.DateTime;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +23,9 @@ public final class APIController {
         this.repo = repo;
     }
 
-    //todo return type Long or String???
     @PostMapping(value = "/api/code/new", consumes = "application/json")
     private Map<String, String> postCode(@RequestBody Code code) {
-        code.resetDate();
+        code.setDate(LocalDateTime.now(ZoneId.systemDefault()));
         return Map.of("id", String.valueOf(repo.save(code).getId()));
     }
 
@@ -35,7 +36,8 @@ public final class APIController {
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no code with the given ID"));
         return Map.of(
                 "code", code.getCode(),
-                "date", DateTime.Formatted(code.getDate())
+//                "date", DateTime.Formatted(code.getDate())
+                "date", code.getDate().toString()
         );
     }
 
@@ -44,11 +46,10 @@ public final class APIController {
     @GetMapping(value = "/api/code/latest")
     private List<Map<String, String>> getLatestCode() {
         var codeMapList = new ArrayList<Map<String, String>>();
-        final var codes = repo.findLatestByOrderByDateDesc(10);
-        for (var code : codes) {
+        for (var code : repo.findLatestByOrderByDateDesc(10)) {
             codeMapList.add(Map.of(
                     "code", code.getCode(),
-                    "date", DateTime.Formatted(code.getDate())
+                    "date", code.getDate().toString()
             ));
         }
         return codeMapList;

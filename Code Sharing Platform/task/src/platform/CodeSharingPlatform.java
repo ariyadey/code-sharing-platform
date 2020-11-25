@@ -14,12 +14,11 @@ public class CodeSharingPlatform {
 
 //    @Bean
 //    public CommandLineRunner runApplication(CodeRepository repository) {
-//        return args -> {
-//
-//        };
+//        return args -> {};
 //    }
 }
 
 /*
 todo: change the hierarchy of folders according to your specifications and mvc
+todo: Make controllers return formatted date
 */

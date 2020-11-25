@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import platform.model.CodeRepository;
-import platform.utils.DateTime;
-
-import java.util.Date;
 
 @Controller
 public final class ViewController {
@@ -21,13 +18,14 @@ public final class ViewController {
         this.repo = repo;
     }
 
-    //todo can you make two statements one? (With the help of Freemarker)
+    //Todo: Try to do it with just one Model attribute
     @GetMapping(value = "/code/{id}")
     private String getCodeView(Model model, @PathVariable long id) {
         final var code = repo.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no code with the given ID")
         );
-        model.addAttribute("date", DateTime.Formatted(code.getDate()));
+//        model.addAttribute("date", DateTime.Formatted(code.getDate()));
+        model.addAttribute("date", code.getDate().toString());
         model.addAttribute("code", code.getCode());
         return "code";
     }

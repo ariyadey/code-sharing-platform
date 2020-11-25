@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//todo play with this class
 //@WebFilter("/api/*")
 @Component("/api/*")
 public final class APIResponseHeaderFilter implements Filter {
@@ -20,12 +21,8 @@ public final class APIResponseHeaderFilter implements Filter {
     }
 
 //    @Override
-//    public void init(FilterConfig filterConfig) throws ServletException {
-//        // ...
-//    }
+//    public void init(FilterConfig filterConfig) throws ServletException {}
 //
 //    @Override
-//    public void destroy() {
-//        // ...
-//    }
+//    public void destroy() {}
 }

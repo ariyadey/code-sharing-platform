@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("unused") //todo do i need setters?!
 @Entity
 public final class Code {
     @Id
@@ -15,7 +15,7 @@ public final class Code {
     private long id;
     @Column(name = "SNIPPET")
     private String code;
-    private LocalDateTime date;    //todo Save date in DB as Date!!!
+    private LocalDateTime date;
 
     public Code() {
     }
