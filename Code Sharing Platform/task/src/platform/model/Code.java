@@ -2,7 +2,6 @@ package platform.model;
 
 import platform.utils.DateTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +12,6 @@ public final class Code {
     @Id
     @GeneratedValue
     private long id;
-    @Column(name = "ldkjf")
     private String code;
     private String date;
 
