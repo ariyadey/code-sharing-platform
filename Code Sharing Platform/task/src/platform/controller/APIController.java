@@ -22,9 +22,9 @@ public final class APIController {
 
     //todo return type Long or String???
     @PostMapping(value = "/api/code/new", consumes = "application/json")
-    private String postCode(@RequestBody Code code) {
+    private Map<String, String> postCode(@RequestBody Code code) {
         code.resetDate();
-        return String.valueOf(repo.save(code).getId());
+        return Map.of("id", String.valueOf(repo.save(code).getId()));
     }
 
     //todo get rid of Map
