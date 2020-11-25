@@ -2,23 +2,30 @@ package platform.model;
 
 import platform.utils.DateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 
 @SuppressWarnings("unused")
 @Entity
 public final class Code {
     @Id
-    private Integer id;
+    @GeneratedValue
+    private long id;
+    @Column(name = "ldkjf")
     private String code;
     private String date;
 
     public Code() {
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -37,11 +44,12 @@ public final class Code {
         this.date = date;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void resetDate() {
+        setDate(DateTime.nowFormatted());
     }
 
-    void update() {
-        date = DateTime.format(LocalDateTime.now());
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
