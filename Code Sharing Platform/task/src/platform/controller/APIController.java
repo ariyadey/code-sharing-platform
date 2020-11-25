@@ -22,9 +22,9 @@ public final class APIController {
 
     //todo return type Long or String???
     @PostMapping(value = "/api/code/new", consumes = "application/json")
-    private long postCode(@RequestBody Code code) {
+    private String postCode(@RequestBody Code code) {
         code.resetDate();
-        return repo.save(code).getId();
+        return String.valueOf(repo.save(code).getId());
     }
 
     //todo get rid of Map
@@ -43,7 +43,7 @@ public final class APIController {
     @GetMapping(value = "/api/code/latest")
     private List<Map<String, String>> getLatestCode() {
         var codeMapList = new ArrayList<Map<String, String>>();
-        final var codes = repo.findAllOrderByDateDesc().subList(0, 9);
+        final var codes = repo.findLatestByOrderByDateDesc(10);
         for (var code : codes) {
             codeMapList.add(Map.of(
                     "code", code.getCode(),
