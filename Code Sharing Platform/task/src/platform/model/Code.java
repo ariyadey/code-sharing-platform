@@ -1,7 +1,5 @@
 package platform.model;
 
-import platform.utils.DateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,10 +46,5 @@ public final class Code {
 
     public void resetDate() {
         date = LocalDateTime.now(ZoneId.systemDefault());
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }
