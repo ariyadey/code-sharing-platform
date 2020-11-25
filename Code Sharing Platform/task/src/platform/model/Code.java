@@ -15,7 +15,7 @@ public final class Code {
     private long id;
     @Column(name = "SNIPPET")
     private String code;
-    private String date;
+    private String date;    //todo Save date in DB as Date!!!
 
     public Code() {
     }
