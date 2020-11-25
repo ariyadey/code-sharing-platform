@@ -7,5 +7,5 @@ import java.util.List;
 
 @Component
 public interface CodeRepository extends CrudRepository<Code, Long> {
-    List<Code> findAllOrderByDateDesc();
+
 }
