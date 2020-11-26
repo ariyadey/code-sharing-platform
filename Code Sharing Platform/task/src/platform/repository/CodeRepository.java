@@ -1,11 +1,13 @@
-package platform.model;
+package platform.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import platform.model.Code;
 
 import java.util.List;
 
-@Component
+//@Component
+@Repository
 public interface CodeRepository extends CrudRepository<Code, Long> {
     List<Code> findAllByOrderByDateDesc();
 

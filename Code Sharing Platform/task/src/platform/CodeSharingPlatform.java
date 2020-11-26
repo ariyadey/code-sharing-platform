@@ -22,4 +22,5 @@ public class CodeSharingPlatform {
 todo: change the hierarchy of folders according to your specifications and mvc
 todo: Make controllers return formatted date
 todo: Highlight the code snippet based on the guidance
+todo: Use Spring's @ControllerAdvice to handle errors
 */
