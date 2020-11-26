@@ -7,14 +7,18 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-@SuppressWarnings("unused") //todo do i need setters?!
+
+@SuppressWarnings("unused")
 @Entity
 public final class Code {
+
     @Id
     @GeneratedValue
     private long id;
+
     @Column(name = "SNIPPET")
     private String code;
+
     private LocalDateTime date;
 
     public Code() {
