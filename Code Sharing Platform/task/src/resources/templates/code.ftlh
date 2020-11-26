@@ -5,11 +5,9 @@
     <title>Code</title>
 </head>
 <body>
-<#if date??>
-    <p><span id="load_date">${date}</span></p>
-</#if>
 <#if code??>
-    <pre id="code_snippet">${code}</pre>
+    <p><span id="load_date">${code.dateFormatted}</span></p>
+    <pre id="code_snippet">${code.code}</pre>
 </#if>
 </body>
 </html>

@@ -1,11 +1,11 @@
 package platform.model;
 
-import javax.persistence.Column;
+import platform.util.DateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 
 @SuppressWarnings("unused")
@@ -16,7 +16,6 @@ public final class Code {
     @GeneratedValue
     private long id;
 
-    @Column(name = "SNIPPET")
     private String code;
 
     private LocalDateTime date;
@@ -48,7 +47,11 @@ public final class Code {
         this.date = date;
     }
 
-    public void resetDate() {
-        date = LocalDateTime.now(ZoneId.systemDefault());
+    public String getDateFormatted() {
+        return DateTime.formatted(date);
     }
+
+//    public void resetDate() {
+//        date = LocalDateTime.now(ZoneId.systemDefault());
+//    }
 }

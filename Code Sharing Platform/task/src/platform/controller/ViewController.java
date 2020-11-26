@@ -25,8 +25,7 @@ public final class ViewController {
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no code with the given ID")
         );
 //        model.addAttribute("date", DateTime.Formatted(code.getDate()));
-        model.addAttribute("date", code.getDate().toString());
-        model.addAttribute("code", code.getCode());
+        model.addAttribute("code", code);
         return "code";
     }
 

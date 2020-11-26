@@ -8,7 +8,6 @@ import platform.model.Code;
 import platform.repository.CodeRepository;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,7 @@ public final class APIController {
 
     @PostMapping(value = "/api/code/new", consumes = "application/json")
     private Map<String, String> postCode(@RequestBody Code code) {
-        code.setDate(LocalDateTime.now(ZoneId.systemDefault()));
+        code.setDate(LocalDateTime.now());
         return Map.of("id", String.valueOf(repo.save(code).getId()));
     }
 
@@ -36,7 +35,7 @@ public final class APIController {
         return Map.of(
                 "code", code.getCode(),
 //                "date", DateTime.Formatted(code.getDate())
-                "date", code.getDate().toString()
+                "date", code.getDateFormatted()
         );
     }
 
@@ -48,7 +47,7 @@ public final class APIController {
         for (var code : repo.findLatestByOrderByDateDesc(10)) {
             codeMapList.add(Map.of(
                     "code", code.getCode(),
-                    "date", code.getDate().toString()
+                    "date", code.getDateFormatted()
             ));
         }
         return codeMapList;
