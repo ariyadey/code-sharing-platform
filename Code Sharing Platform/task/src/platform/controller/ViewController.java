@@ -33,7 +33,7 @@ public final class ViewController {
     @GetMapping(value = "/code/latest")
     private String getLatestCodeView(Model model) {
         model.addAttribute("codeList", repo.findLatestByOrderByDateDesc(10));
-        return "codes";
+        return "latest";
     }
 
     @GetMapping("/code/new")

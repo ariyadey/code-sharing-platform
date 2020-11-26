@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Code</title>
+    <title>Latest</title>
     <link rel="stylesheet"
           href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/androidstudio.min.css">
     <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-<#if code??>
+<#list codeList as code>
     <p><span id="load_date">${code.dateFormatted}</span></p>
-    <#--Todo: delete "pre" tag-->
     <pre id="code_snippet"><code>${code.code}</code></pre>
-</#if>
+    <br>
+</#list>
 </body>
 </html>
