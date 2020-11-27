@@ -1,6 +1,11 @@
+//Todo: Consider adding a boolean field named expired to optimize the code
+
 package platform.model;
 
-import platform.util.DateTime;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import platform.projection.CodeProjection;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,79 +14,93 @@ import java.util.UUID;
 
 @SuppressWarnings("unused")
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public final class Code {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "VARCHAR(255)", insertable = false, updatable = false)
+    @Id
     private UUID id;
 
-    private String code;
+    @Column
+    private String snippet;
 
+    @Column
     private boolean secret;
 
-    private LocalDateTime date;
+    @Column
+    private LocalDateTime uploadDateTime;
 
-    private int time;
+    @Column
+    private LocalDateTime expirationDateTime;
 
-    private int views;
+    @Column
+    private int viewsLeft;
 
-    public Code() {
+    private Code(String snippet, int secondsLeft, int viewsLeft) {
+        this.snippet = snippet;
+        this.secret = secondsLeft > 0 || viewsLeft > 0;
+        this.uploadDateTime = LocalDateTime.now();
+        this.expirationDateTime = LocalDateTime.now().plusSeconds(secondsLeft);
+        this.viewsLeft = viewsLeft;
     }
 
-    public UUID getId() {
-        return id;
+    public static Code mapFrom(CodeProjection projection) {
+        return new Code(projection.getCode(), projection.getTime(), projection.getViews());
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public boolean isSecret() {
-        return secret;
-    }
-
-    public void setSecret(boolean secret) {
-        this.secret = secret;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public int getViews() {
-        return views;
-    }
-
-    public void setViews(int views) {
-        this.views = views;
-    }
-
-    public String getDateFormatted() {
-        return DateTime.formatted(date);
-    }
-
-//    public void resetDate() {
-//        date = LocalDateTime.now(ZoneId.systemDefault());
+//    public Code() {
 //    }
+//
+//    public UUID getId() {
+//        return id;
+//    }
+//
+//    public void setId(UUID id) {
+//        this.id = id;
+//    }
+//
+//    public String getCode() {
+//        return code;
+//    }
+//
+//    public void setCode(String code) {
+//        this.code = code;
+//    }
+//
+//    public boolean isSecret() {
+//        return secret;
+//    }
+//
+//    public void setSecret(boolean secret) {
+//        this.secret = secret;
+//    }
+//
+//    public LocalDateTime getUploadDateTime() {
+//        return uploadDateTime;
+//    }
+//
+//    public void setUploadDateTime(LocalDateTime uploadDateTime) {
+//        this.uploadDateTime = uploadDateTime;
+//    }
+//
+//    public LocalDateTime getExpirationDateTime() {
+//        return expirationDateTime;
+//    }
+//
+//    public void setExpirationDateTime(LocalDateTime expirationDateTime) {
+//        this.expirationDateTime = expirationDateTime;
+//    }
+//
+//    public int getRemainedViews() {
+//        return remainedViews;
+//    }
+//
+//    public void setRemainedViews(int remainedViews) {
+//        this.remainedViews = remainedViews;
+//    }
+
+
 }
