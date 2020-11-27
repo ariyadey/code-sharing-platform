@@ -5,19 +5,26 @@
     <title>Create</title>
 </head>
 <body>
-<#--todo get the ID of code (optional)-->
-<#--todo remove form or something else?-->
-<form action="/api/code/new" method="post">
+<#--Todo: Consider using Form-->
+<#--<form action="/api/code/new" method="post">-->
     <label for="code_snippet">Type your code below:</label>
     <br>
     <textarea id="code_snippet"></textarea>
     <br>
+    <label for="time_restriction">Time restriction (In seconds):</label><input id="time_restriction" type="text"/>
+    <br>
+    <label for="views_restriction">View number restriction:</label><input id="views_restriction" type="text"/>
+    <br>
     <button id="send_snippet" onclick="send()" type="submit">Submit</button>
-</form>
+<#--</form>-->
 <script>
+    <#--Todo: Get the ID of code (optional)-->
+    <#--Todo: Should I use value or valueOf?-->
     function send() {
         let object = {
-            "code": document.getElementById("code_snippet").value,
+            "code": document.getElementById("code_snippet").valueOf,
+            "time": document.getElementById("time_restriction").valueOf,
+            "views": document.getElementById("views_restriction").valueOf,
         };
 
         let json = JSON.stringify(object);
