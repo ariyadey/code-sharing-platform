@@ -24,7 +24,7 @@ public final class APIController {
     @PostMapping(value = "/api/code/new", consumes = "application/json")
     private Map<String, String> postCode(@RequestBody Code code) {
         code.setDate(LocalDateTime.now());
-        return Map.of("id", String.valueOf(repo.save(code).getId()));
+        return Map.of("uuid", String.valueOf(repo.save(code).getId()));
     }
 
     //todo get rid of Map

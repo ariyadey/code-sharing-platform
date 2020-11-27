@@ -2,10 +2,9 @@ package platform.model;
 
 import platform.util.DateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 @SuppressWarnings("unused")
@@ -13,8 +12,9 @@ import java.time.LocalDateTime;
 public final class Code {
 
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "VARCHAR(255)", insertable = false, updatable = false)
+    private UUID id;
 
     private String code;
 
@@ -23,11 +23,11 @@ public final class Code {
     public Code() {
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
