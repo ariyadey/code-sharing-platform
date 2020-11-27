@@ -18,7 +18,13 @@ public final class Code {
 
     private String code;
 
+    private boolean secret;
+
     private LocalDateTime date;
+
+    private int time;
+
+    private int views;
 
     public Code() {
     }
@@ -39,12 +45,36 @@ public final class Code {
         this.code = code;
     }
 
+    public boolean isSecret() {
+        return secret;
+    }
+
+    public void setSecret(boolean secret) {
+        this.secret = secret;
+    }
+
     public LocalDateTime getDate() {
         return date;
     }
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
     }
 
     public String getDateFormatted() {
