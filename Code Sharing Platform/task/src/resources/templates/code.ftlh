@@ -10,9 +10,10 @@
 </head>
 <body>
 <#if code??>
-    <p><span id="load_date">${code.dateFormatted}</span></p>
+    <p><span id="load_date">${code.date}</span></p>
     <#--Todo: delete "pre" tag-->
-    <pre id="code_snippet"><code>${code.snippet}</code></pre>
+    <pre id="code_snippet"><code>${code.code}</code></pre>
+    <#--Todo:Add time and views conditionally!-->
 </#if>
 </body>
 </html>
