@@ -24,6 +24,7 @@ public final class APIController {
     @PostMapping(value = "/api/code/new", consumes = "application/json")
     private Map<String, String> postCode(@RequestBody Code code) {
         code.setDate(LocalDateTime.now());
+        code.setSecret((code.getTime() >= 0 || code.getViews() >= 0));
         return Map.of("uuid", String.valueOf(repo.save(code).getId()));
     }
 
@@ -31,7 +32,7 @@ public final class APIController {
     @GetMapping(value = "/api/code/{id}")
     private Map<String, String> getCode(@PathVariable long id) {
         final var code = repo.findById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no code with the given ID"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no code with the given UUID"));
         return Map.of(
                 "code", code.getCode(),
 //                "date", DateTime.Formatted(code.getDate())
