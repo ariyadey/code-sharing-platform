@@ -12,7 +12,7 @@
 <#if code??>
     <p><span id="load_date">${code.dateFormatted}</span></p>
     <#--Todo: delete "pre" tag-->
-    <pre id="code_snippet"><code>${code.code}</code></pre>
+    <pre id="code_snippet"><code>${code.snippet}</code></pre>
 </#if>
 </body>
 </html>
