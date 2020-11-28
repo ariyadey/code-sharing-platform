@@ -11,9 +11,12 @@
 <body>
 <#if code??>
     <p><span id="load_date">${code.date}</span></p>
-    <#--Todo: delete "pre" tag-->
+    <#--Todo: Delete "pre" tag-->
     <pre id="code_snippet"><code>${code.code}</code></pre>
-    <#--Todo:Add time and views conditionally!-->
+    <#--Todo: Add time and views conditionally!-->
+    <#if code.time gt 0>
+        <span id="time_restriction"> ... </span>
+    </#if>
 </#if>
 </body>
 </html>

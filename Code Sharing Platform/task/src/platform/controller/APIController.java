@@ -1,56 +1,40 @@
 package platform.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import platform.model.Code;
+import platform.projection.CodeProjectorApi;
 import platform.repository.CodeRepository;
+import platform.service.Service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
+//TODO ############ Check negativity of json attributes: time an views on all controllers #############
 @RestController
 public final class APIController {
     private final CodeRepository repo;
+    private final Service service;
 
     @Autowired
-    public APIController(CodeRepository repo) {
+    public APIController(CodeRepository repo, Service service) {
         this.repo = repo;
+        this.service = service;
     }
 
     @PostMapping(value = "/api/code/new", consumes = "application/json")
-    private Map<String, String> postCode(@RequestBody Code code) {
-        code.setDate(LocalDateTime.now());
-        code.setSecret((code.getTime() >= 0 || code.getViews() >= 0));
-        return Map.of("uuid", String.valueOf(repo.save(code).getId()));
+    private Map<String, String> postCode(@RequestBody CodeProjectorApi projector) {
+        //Todo: Potential bug: toString() instead of String.value.of()
+        return Map.of("uuid", repo.save(projector.toCode()).getId().toString());
     }
 
-    //todo get rid of Map
     @GetMapping(value = "/api/code/{id}")
-    private Map<String, String> getCode(@PathVariable long id) {
-        final var code = repo.findById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no code with the given UUID"));
-        return Map.of(
-                "code", code.getCode(),
-//                "date", DateTime.Formatted(code.getDate())
-                "date", code.getDateFormatted()
-        );
+    private CodeProjectorApi getCode(@PathVariable String id) {
+        return service.projectRowById(id);
     }
 
-    //todo get rid of map
     // todo: it returns the 10 most recently uploaded codes
     @GetMapping(value = "/api/code/latest")
-    private List<Map<String, String>> getLatestCode() {
-        var codeMapList = new ArrayList<Map<String, String>>();
-        for (var code : repo.findLatestByOrderByDateDesc(10)) {
-            codeMapList.add(Map.of(
-                    "code", code.getCode(),
-                    "date", code.getDateFormatted()
-            ));
-        }
-        return codeMapList;
+    private Collection<CodeProjectorApi> getLatestCode() {
+        return repo.findFirst10BySecretFalseOrderByUploadDateTimeDesc();
     }
 }
