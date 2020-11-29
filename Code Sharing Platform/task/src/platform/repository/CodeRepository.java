@@ -3,7 +3,6 @@ package platform.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import platform.model.Code;
-import platform.projection.CodeProjectorApi;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -13,11 +12,13 @@ import java.util.UUID;
 @Repository
 public interface CodeRepository extends CrudRepository<Code, Long> {
 
-    //Todo: check if it doesn't have any problem with rows less than 10
-    Collection<CodeProjectorApi> findFirst10BySecretFalseOrderByUploadDateTimeDesc();
+    Optional<Code> findByIdAndExpirationDateTimeAfterAndViewsLeftGreaterThanEqual(UUID id,
+                                                                                  LocalDateTime ExpirationDatetime,
+                                                                                  int viewsLeft);
 
-    <T> Optional<T> findByIdAndViewsLeftGreaterThanEqualAndExpirationDateTimeAfter(Class<T> tClass,
-                                                                                   UUID uuid,
-                                                                                   int viewsLeft,
-                                                                                   LocalDateTime ExpirationDatetime);
+    //Todo: check if it doesn't have any problem with rows less than 10
+    <T> Collection<T> findFirst10ByExpirationDateTimeEqualsAndViewsLeftEqualsOrderByUploadDateTimeDesc(LocalDateTime expirationDateTime,
+                                                                                                       int viewsLeft);
+
+
 }

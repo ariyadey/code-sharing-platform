@@ -27,12 +27,21 @@ public final class Code {
     @Column(nullable = false, updatable = false)
     private LocalDateTime uploadDateTime;
 
-    @Column(nullable = false, updatable = false)
-    private boolean secret;
-
     @Column(updatable = false)
     private LocalDateTime expirationDateTime;
 
     @Column
-    private Integer viewsLeft;
+    private int viewsLeft;
+
+    //Todo
+    @PreUpdate
+    void preUpdate() {
+    }
+
+    @PostLoad
+    void postLoad() {
+        if (viewsLeft != Integer.MAX_VALUE) {
+            viewsLeft--;
+        }
+    }
 }
