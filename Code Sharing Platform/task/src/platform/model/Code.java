@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public final class Code {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,15 +36,10 @@ public final class Code {
     @Column
     private Integer viewsLeft;
 
-    //Todo
-    @PreUpdate
-    void preUpdate() {
-    }
-
-    @PostLoad
-    void postLoad() {
-        if (viewsLeft != Integer.MAX_VALUE) {
-            viewsLeft--;
-        }
+    public Code(String snippet, LocalDateTime uploadDateTime, LocalDateTime expirationDateTime, Integer viewsLeft) {
+        this.snippet = snippet;
+        this.uploadDateTime = uploadDateTime;
+        this.expirationDateTime = expirationDateTime;
+        this.viewsLeft = viewsLeft;
     }
 }

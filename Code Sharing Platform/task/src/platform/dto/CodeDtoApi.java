@@ -9,15 +9,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public final class CodeDtoApi extends CodeDto {
 
-    public CodeDtoApi(Code code) {
-        super(code);
-        fromCode(code);
+    public CodeDtoApi(String snippet,
+                      LocalDateTime uploadDateTime,
+                      LocalDateTime expirationDateTime,
+                      Integer viewsLeft) {
+        fromCode(new Code(snippet, uploadDateTime, expirationDateTime, viewsLeft));
     }
 
     public CodeDtoApi fromCode(Code code) {
-        if (code.getExpirationDateTime() == LocalDateTime.MAX) time = 0;
+        super.fromCode(code);
+        if (code.getExpirationDateTime() == null) time = 0;
         else time = DateTime.getDurationLeftInSeconds(code.getExpirationDateTime());
-        views = code.getViewsLeft() == Integer.MAX_VALUE ? 0 : code.getViewsLeft();
+        views = code.getViewsLeft() == null ? 0 : code.getViewsLeft();
         return this;
     }
 }

@@ -18,10 +18,6 @@ abstract class CodeDto {
     protected Integer time;
     protected Integer views;
 
-    protected CodeDto(Code code) {
-        fromCode(code);
-    }
-
     protected CodeDto fromCode(Code code) {
         this.code = code.getSnippet();
         date = DateTime.getFormatted(code.getUploadDateTime());
