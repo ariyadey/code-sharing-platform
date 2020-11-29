@@ -12,13 +12,12 @@ import java.util.UUID;
 @Repository
 public interface CodeRepository extends CrudRepository<Code, Long> {
 
-    Optional<Code> findByIdAndExpirationDateTimeAfterAndViewsLeftGreaterThanEqual(UUID id,
-                                                                                  LocalDateTime ExpirationDatetime,
-                                                                                  int viewsLeft);
+    Optional<Code> findByIdAndExpirationDateTimeAfterAndViewsLeftGreaterThanOrSecretFalse(UUID id,
+                                                                                          LocalDateTime ExpirationDatetime,
+                                                                                          int viewsLeft);
 
     //Todo: check if it doesn't have any problem with rows less than 10
-    <T> Collection<T> findFirst10ByExpirationDateTimeEqualsAndViewsLeftEqualsOrderByUploadDateTimeDesc(LocalDateTime expirationDateTime,
-                                                                                                       int viewsLeft);
+    <T> Collection<T> findFirst10BySecretFalse();
 
 
 }

@@ -6,22 +6,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import platform.dto.CodeDtoApi;
 import platform.repository.CodeRepository;
-import platform.service.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 
-//TODO ############ Check negativity of json attributes: time an views on all controllers #############
 @RestController
 public final class APIController {
     private final CodeRepository repo;
-//    private final Service service;
 
     @Autowired
-    public APIController(CodeRepository repo, Service service) {
+    public APIController(CodeRepository repo) {
         this.repo = repo;
-//        this.service = service;
     }
 
     @PostMapping(value = "/api/code/new", consumes = "application/json")
@@ -31,20 +28,17 @@ public final class APIController {
 
     @GetMapping(value = "/api/code/{id}")
     private CodeDtoApi getCode(@PathVariable String id) {
-        //Todo: check if the view field changes properly
-        return CodeDtoApi.fromCode(repo.save(repo.findByIdAndExpirationDateTimeAfterAndViewsLeftGreaterThanEqual(
+        return new CodeDtoApi().fromCode(repo.save(repo.findByIdAndExpirationDateTimeAfterAndViewsLeftGreaterThanOrSecretFalse(
                 UUID.fromString(id),
                 LocalDateTime.now(),
                 0)
-                .orElseThrow(
-                        () -> new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "There is no code with the given UUID"))));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "There is no code with the given UUID"))));
     }
 
-    //Todo: it returns the 10 most recently uploaded codes
-//    @GetMapping(value = "/api/code/latest")
-//    private Collection<CodeProjectorApi> getLatestCode() {
-//        return repo.findFirst10BySecretFalseOrderByUploadDateTimeDesc();
-//    }
+    @GetMapping(value = "/api/code/latest")
+    private Collection<CodeDtoApi> getLatestCode() {
+        return repo.findFirst10BySecretFalse();
+    }
 }

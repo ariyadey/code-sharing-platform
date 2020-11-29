@@ -27,11 +27,14 @@ public final class Code {
     @Column(nullable = false, updatable = false)
     private LocalDateTime uploadDateTime;
 
+    @Column(nullable = false, updatable = false)
+    private boolean secret;
+
     @Column(updatable = false)
     private LocalDateTime expirationDateTime;
 
     @Column
-    private int viewsLeft;
+    private Integer viewsLeft;
 
     //Todo
     @PreUpdate
