@@ -11,11 +11,15 @@
 <body>
 <#if code??>
     <p><span id="load_date">${code.date}</span></p>
-    <#--Todo: Delete "pre" tag-->
+<#--Todo: Delete "pre" tag-->
     <pre id="code_snippet"><code>${code.code}</code></pre>
-    <#--Todo: Add time and views conditionally!-->
-    <#if code.time gt 0>
-        <span id="time_restriction"> ... </span>
+<#--Todo: Add time and views conditionally!-->
+    <#if code.time??>
+        <span id="time_restriction">${code.time}</span>
+    </#if>
+    <br>
+    <#if code.views??>
+        <span id="views_restriction">${code.views}</span>
     </#if>
 </#if>
 </body>

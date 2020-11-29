@@ -42,4 +42,24 @@ public final class Code {
         this.expirationDateTime = expirationDateTime;
         this.viewsLeft = viewsLeft;
     }
+
+//    @PrePersist
+//    void prePersist() {
+//        if (viewsLeft != null && viewsLeft > 0) {
+//            viewsLeft--;
+//        }
+//    }
+
+
+    @Override
+    public String toString() {
+        return "Code{" +
+               "id=" + id +
+               ", snippet='" + snippet + '\'' +
+               ", uploadDateTime=" + uploadDateTime +
+               ", secret=" + secret +
+               ", expirationDateTime=" + expirationDateTime +
+               ", viewsLeft=" + viewsLeft +
+               '}';
+    }
 }

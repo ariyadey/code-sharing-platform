@@ -9,6 +9,9 @@ import platform.dto.CodeDtoView;
 import platform.repository.CodeRepository;
 import platform.service.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Controller
 public final class ViewController {
     private final CodeRepository repo;
@@ -28,13 +31,16 @@ public final class ViewController {
 
     @GetMapping(value = "/code/{id}")
     private String getCodeView(Model model, @PathVariable String id) {
-        model.addAttribute("code", new CodeDtoView().fromCode(repo.save(service.viewCodeById(id))));
+        model.addAttribute("code", new CodeDtoView().fromCode(service.viewCodeById(id)));
         return "code";
     }
 
     @GetMapping(value = "/code/latest")
     private String getLatestCodeView(Model model) {
-        model.addAttribute("codeList", repo.findFirst10BySecretFalse());
+        final var codes = repo.findFirst10BySecretFalseOrderByUploadDateTimeDesc();
+        final Collection<CodeDtoView> dtoCollection = new ArrayList<>();
+        for (var code : codes) dtoCollection.add(new CodeDtoView().fromCode(code));
+        model.addAttribute("codeList", dtoCollection);
         return "latest";
     }
 }

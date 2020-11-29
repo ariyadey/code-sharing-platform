@@ -6,6 +6,7 @@ import platform.dto.CodeDtoApi;
 import platform.repository.CodeRepository;
 import platform.service.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -32,6 +33,9 @@ public final class APIController {
 
     @GetMapping(value = "/api/code/latest")
     private Collection<CodeDtoApi> getLatestCode() {
-        return repo.findFirst10BySecretFalse();
+        final var codes = repo.findFirst10BySecretFalseOrderByUploadDateTimeDesc();
+        final Collection<CodeDtoApi> dtoCollection = new ArrayList<>();
+        for (var code : codes) dtoCollection.add(new CodeDtoApi().fromCode(code));
+        return dtoCollection;
     }
 }

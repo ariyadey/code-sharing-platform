@@ -18,15 +18,19 @@ public class Service {
         this.repo = repo;
     }
 
+    //Todo: refactor it
     public Code viewCodeById(String id) {
-        final var code = repo.findByIdAndExpirationDateTimeAfterAndViewsLeftGreaterThanOrSecretFalse(
-                UUID.fromString(id),
-                LocalDateTime.now(),
-                0)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "There is no code with the given UUID"));
-        code.setViewsLeft(code.getViewsLeft() - 1);
-        return repo.save(code);
+        final var optCode = repo.findById(UUID.fromString(id));
+        if (optCode.isPresent()) {
+            final var code = optCode.orElseThrow();
+            if (code.getExpirationDateTime() == null || (code.getExpirationDateTime().isAfter(LocalDateTime.now()))) {
+                if (code.getViewsLeft() != null && code.getViewsLeft() > 0) {
+                    code.setViewsLeft(code.getViewsLeft() - 1);
+                    return repo.save(code);
+                } else if (code.getViewsLeft() == null)
+                    return repo.save(code);
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no code with the given UUID");
     }
 }
