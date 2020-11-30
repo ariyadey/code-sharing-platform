@@ -23,7 +23,7 @@ public final class APIController {
 
     @PostMapping(value = "/api/code/new", consumes = "application/json")
     private Map<String, String> postCode(@RequestBody CodeDtoApi dto) {
-        return Map.of("uuid", repo.save(dto.toCode()).getId().toString());
+        return Map.of("id", repo.save(dto.toCode()).getId().toString());
     }
 
     @GetMapping(value = "/api/code/{id}")
