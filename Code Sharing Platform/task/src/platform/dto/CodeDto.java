@@ -28,7 +28,7 @@ abstract class CodeDto {
         final var code = new Code();
         code.setSnippet(this.code);
         code.setUploadDateTime(date == null ? now() : parse(date, DateTime.FORMATTER));
-        code.setSecret(time > 0 || views > 0);
+        code.setSecret((time != null && time > 0) || (views != null && views > 0));
         code.setExpirationDateTime((time == null || time <= 0) ? null : now().plusSeconds(time));
         code.setViewsLeft((views == null || views <= 0) ? null : views);
         return code;
